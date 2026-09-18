@@ -1,1 +1,29 @@
-package com.generated.rescueStock.repositories; import java.util.*; import org.springframework.stereotype.Repository; @Repository public class ShelterRepository { public List<Map<String,Object>> findAll(){ return List.of(Map.of("id",1,"name","避难安置点","status","READY")); } }
+package com.generated.rescueStock.repositories;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import org.springframework.stereotype.Repository;
+import com.generated.rescueStock.models.Shelter;
+
+@Repository
+public class ShelterRepository {
+  private final Map<Long, Shelter> store = new ConcurrentHashMap<>();
+
+  public List<Shelter> findAll() {
+    List<Shelter> rows = new ArrayList<>(store.values());
+    rows.sort(Comparator.comparingLong(s -> s.id));
+    return rows;
+  }
+
+  public Shelter findById(long id) {
+    return store.get(id);
+  }
+
+  public Shelter save(Shelter shelter) {
+    store.put(shelter.id, shelter);
+    return shelter;
+  }
+}
