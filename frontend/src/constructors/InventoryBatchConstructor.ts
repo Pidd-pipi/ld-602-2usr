@@ -1,14 +1,16 @@
 import type { InventoryBatch } from "../types/InventoryBatch";
 
 export const createDefaultInventoryBatch = (overrides: Partial<InventoryBatch> = {}): InventoryBatch => ({
-  id: 1 as never,
-  warehouse_id: 1 as never,
-  supply_item_id: 1 as never,
-  batch_no: "batch no 1" as never,
-  quantity: 92 as never,
-  expire_at: "2026-06-11T09:00:00Z" as never,
-  inbound_source: "inbound source 1" as never,
-  quality_status: "SUBMITTED" as never,
+  id: 0,
+  warehouse_id: 0,
+  supply_item_id: 0,
+  batch_no: "",
+  quantity: 0,
+  reserved_quantity: 0,
+  available_quantity: 0,
+  expire_at: "",
+  inbound_source: "",
+  quality_status: "QUALIFIED",
   ...overrides
 });
 

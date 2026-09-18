@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    # LOCK_MODE=0：表级读写锁，FOR UPDATE 会像 MySQL InnoDB 一样阻塞并发审批事务
+    # LOCK_TIMEOUT 5s：抢锁失败方快速返回，避免长时间挂起
+    url: jdbc:h2:mem:rescue_stock;MODE=MySQL;DB_CLOSE_DELAY=-1;LOCK_MODE=0;LOCK_TIMEOUT=5000
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+  jackson:
+    property-naming-strategy: SNAKE_CASE

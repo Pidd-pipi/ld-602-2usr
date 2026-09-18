@@ -1,1 +1,23 @@
-package com.generated.rescueStock.services; import java.util.*; import org.springframework.stereotype.Service; import com.generated.rescueStock.repositories.WarehouseRepository; @Service public class WarehouseService { private final WarehouseRepository repo; public WarehouseService(WarehouseRepository repo){this.repo=repo;} public List<Map<String,Object>> list(){return repo.findAll();} }
+package com.generated.rescueStock.services;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
+import com.generated.rescueStock.constructors.WarehouseDtoFactory;
+import com.generated.rescueStock.repositories.WarehouseRepository;
+
+@Service
+public class WarehouseService {
+
+  private final WarehouseRepository repo;
+
+  public WarehouseService(WarehouseRepository repo) {
+    this.repo = repo;
+  }
+
+  public List<Map<String, Object>> list() {
+    return repo.findAll().stream().map(WarehouseDtoFactory::toDto).toList();
+  }
+}
